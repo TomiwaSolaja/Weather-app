@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <link rel="stylesheet" href="./css/css.css">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar">
+        <span id="header-placeholder" class="navbar-brand">Weather dashboard</span>
+    </nav>
+    <!-- Alert -->
+    <div id="alert-area"></div>
+    <!-- Main content -->
+    <main class="container">
+        <div class="divider"></div>
+        <div class="row">
+            <!-- Sidebar -->
+            <aside class="col-sm-3">
+                <!-- Search field -->
+                <form>
+                    <h5>Search for a city:</h5>
+                    <div class="input-group mb-3">
+                        <input id="city-input" type="text" class="form-control" placeholder="Berlin" aria-label="city" aria-describedby="city-search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="city-search">
+                                <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                      </div>
+                </form>
+                <!-- City selector -->
+                <div id="search-history"></div>
+                <div id="clear-history">
+                    <button type="button" class="btn btn-secondary mt-2" id="clear-btn">Clear</button>
+                </div>
+            </aside>
+            <!-- Detail overview -->
+            <div class="col-sm-9 pl-5">
+                <div class="row detail-overview">
+                    <div class="col-sm-12">
+                        <h2 id="content-city">weather forecast!</h2><div class="header-icon"></div>
+                        <ul id="weather-details" class="mt-4">
+                            <li><b><span id="today"></span></b></li>
+                            <li><span id="temperature"></span></li>
+                            <li><span id="humidity"></span></li>
+                            <li><span id="wind"></span></li>
+                            <li><span id="uv"></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 5 day forecast -->
+                <div class="row mt-5 mb-5 forecast-div">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h4>5 day forecast</h4>
+                            </div>
+                        </div>
+                        <div class="row ml-1">
+                            <div class="col-fluid-2 forecast mr-1 mb-2">
+                                <p id="forecast-1-day"></p>
+                                <div id="forecast-1-icon"></div>
+                                <p><span id="forecast-1-temp"></span></p>
+                                <p><span id="forecast-1-humid"></span></p>
+                            </div>
+                            <div class="col-fluid-2 forecast mr-1 mb-2">
+                                <p id="forecast-2-day"></p>
+                                <div id="forecast-2-icon"></div>
+                                <p><span id="forecast-2-temp"></span></p>
+                                <p><span id="forecast-2-humid"></span></p>
+                            </div>
+                            <div class="col-fluid-2 forecast mr-1 mb-2">
+                                <p id="forecast-3-day"></p>
+                                <div id="forecast-3-icon"></div>
+                                <p><span id="forecast-3-temp"></span></p>
+                                <p><span id="forecast-3-humid"></span></p>
+                            </div>
+                            <div class="col-fluid-2 forecast mr-1 mb-2">
+                                <p id="forecast-4-day"></p>
+                                <div id="forecast-4-icon"></div>
+                                <p><span id="forecast-4-temp"></span></p>
+                                <p><span id="forecast-4-humid"></span></p>
+                            </div>
+                            <div class="col-fluid-2 forecast mr-1 mb-2">
+                                <p id="forecast-5-day"></p>
+                                <div id="forecast-5-icon"></div>
+                                <p><span id="forecast-5-temp"></span></p>
+                                <p><span id="forecast-5-humid"></span></p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                Delete Search History?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="confirm" type="button" class="btn btn-primary" onclick="clearHistory()">Clear history</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/js.js"></script>
+</body>
+</html>
